@@ -1,9 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(git add *)",
-      "Bash(git -c core.autocrlf=true commit -q -m \"Track prebuilt admin dist for /admin serving\")",
-      "Bash(git push *)"
-    ]
-  }
-}
