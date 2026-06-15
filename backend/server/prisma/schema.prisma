@@ -1,0 +1,83 @@
+// The DIY Daydream — database schema (Neon Postgres)
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL") // pooled — used by the app at runtime
+  directUrl = env("DIRECT_URL")   // direct — used by `prisma migrate`
+}
+
+model Category {
+  id        String    @id @default(cuid())
+  name      String
+  slug      String    @unique
+  emoji     String?
+  tint      String?   @default("#f7eaee")
+  sortOrder Int       @default(0)
+  createdAt DateTime  @default(now())
+  products  Product[]
+}
+
+model Product {
+  id            String   @id @default(cuid())
+  name          String
+  desc          String
+  badge         String? // "best" | "new" | "pop" | null
+  categoryId    String
+  category      Category @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  imageUrl      String? // Cloudinary secure_url
+  imagePublicId String? // Cloudinary public_id (for deletion)
+  artFallback   String?  @default("gift") // inline-SVG key used when no image
+  options       Json     @default("[]") // [{ label, price }]
+  active        Boolean  @default(true)
+  sortOrder     Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([categoryId])
+}
+
+// Single-row table — replaces the old hardcoded discount in settings.js
+model Setting {
+  id      Int    @id @default(1)
+  code    String @default("DAYDREAM10")
+  percent Int    @default(10)
+}
+
+enum OrderStatus {
+  pending
+  confirmed
+  shipped
+  delivered
+  cancelled
+}
+
+enum PaymentStatus {
+  unpaid
+  paid
+  refunded
+}
+
+// Schema ready now; checkout flow that populates it ships in the next phase.
+model Order {
+  id            String        @id @default(cuid())
+  customerName  String
+  email         String
+  phone         String?
+  items         Json // [{ name, variant, price, qty }]
+  subtotal      Int
+  discount      Int           @default(0)
+  total         Int
+  status        OrderStatus   @default(pending)
+  paymentStatus PaymentStatus @default(unpaid)
+  createdAt     DateTime      @default(now())
+}
+
+model AdminUser {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+}

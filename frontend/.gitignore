@@ -1,0 +1,3 @@
+# config.js is now same-origin (window.location.origin) — safe to commit,
+# and needed for deployment. Only ignore logs here.
+*.log

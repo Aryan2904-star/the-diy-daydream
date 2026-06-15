@@ -1,0 +1,26 @@
+{
+  "name": "ddd-admin",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "The DIY Daydream — admin dashboard (React + Vite)",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "react-router-dom": "^7.17.0",
+    "recharts": "^3.8.1",
+    "socket.io-client": "^4.8.3"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.0.2",
+    "vite": "^8.0.16"
+  },
+  "overrides": {
+    "ws": "^8.21.0"
+  }
+}
