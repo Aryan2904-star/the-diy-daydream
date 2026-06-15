@@ -15,7 +15,7 @@ import orderRoutes from "./routes/orders.js";
 import analyticsRoutes from "./routes/analytics.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const FRONTEND_DIR = path.join(__dirname, "..", "..", "frontend");
+const FRONTEND_DIR = path.join(__dirname, "..", "..", "..", "frontend");
 
 const app = express();
 
