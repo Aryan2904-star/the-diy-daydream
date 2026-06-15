@@ -6,7 +6,8 @@ services:
     runtime: node
     rootDir: backend/server
     plan: free
-    buildCommand: npm install
+    # Install backend, then build the admin SPA (served at /admin by the backend)
+    buildCommand: npm install && cd ../admin && npm install && npm run build
     startCommand: npm start
     envVars:
       - key: DATABASE_URL

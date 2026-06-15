@@ -16,6 +16,7 @@ import analyticsRoutes from "./routes/analytics.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const FRONTEND_DIR = path.join(__dirname, "..", "..", "..", "frontend");
+const ADMIN_DIST = path.join(__dirname, "..", "..", "admin", "dist");
 
 const app = express();
 
@@ -46,7 +47,10 @@ app.use("/api/settings", settingsRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/analytics", analyticsRoutes);
 
-// Serve the storefront (single-origin — handy for tunnels / one-box deploys)
+// Admin dashboard (built SPA) at /admin
+app.use("/admin", express.static(ADMIN_DIST));
+
+// Storefront at / (single-origin — handy for tunnels / one-box deploys)
 app.use(express.static(FRONTEND_DIR));
 
 // 404 (unknown /api/* routes or missing files)
