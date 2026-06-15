@@ -6,8 +6,8 @@ services:
     runtime: node
     rootDir: backend/server
     plan: free
-    # Install backend, then build the admin SPA (served at /admin by the backend)
-    buildCommand: npm install && cd ../admin && npm install && npm run build
+    # Admin SPA is prebuilt and committed (backend/admin/dist), served at /admin.
+    buildCommand: npm install
     startCommand: npm start
     envVars:
       - key: DATABASE_URL

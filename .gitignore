@@ -7,8 +7,9 @@ node_modules/
 !.env.example
 
 # ===== Builds =====
-dist/
 build/
+# NOTE: backend/admin/dist is intentionally committed — the backend serves it
+# at /admin in the single-service deploy. Rebuild + commit it when admin changes.
 
 # ===== Tunnel binary =====
 cloudflared
