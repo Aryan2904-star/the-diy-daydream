@@ -1,6 +1,6 @@
 // API client for the admin panel.
-// - Local dev: VITE_API_URL (.env) points at the local backend (http://localhost:4000).
-// - Production (served from the backend at /admin): no VITE_API_URL → same origin.
+// - Local dev: VITE_API_URL (.env) points at the local backend.
+// - Production (served from the backend at /admin): no VITE_API_URL -> same origin.
 const API_URL = (import.meta.env.VITE_API_URL || window.location.origin).replace(
   /\/$/,
   ""
